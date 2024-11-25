@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+    <style>
+        
+        h1, p {
+            font-size: 2rem;
+            color: brown;
+        }
+
+        
+        @media (min-width: 600px) and (max-width: 900px) {
+            h1, p {
+                font-size: 3rem;
+                color: brown;
+            }
+        }
+
+        
+        @media (min-width: 900px) {
+            h1, p {
+                font-size: 4rem;
+                color: brown;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Responsive Webpage!</h1>
+    <p>This page adjusts the font size of the title and description based on the screen width.</p>
+</body>
+</html>
