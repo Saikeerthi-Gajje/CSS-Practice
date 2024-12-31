@@ -1,90 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GitHub User Fetch</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 20px;
-      }
-      .user-info {
-        border: 1px solid #cccccc;
-        padding: 20px;
-        border-radius: 8px;
-        max-width: 400px;
-        margin: 20px auto;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        display: none;
-      }
-      .user-info img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-      }
-      .error {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>GitHub User Fetch</h1>
-    <input type="text" id="username" placeholder="Enter GitHub username" />
-    <button onclick="fetchGitHubUser()">Fetch User</button>
-    <div class="error" id="error"></div>
-    <div class="user-info" id="user-info">
-      <img id="avatar" alt="User Avatar" />
-      <h2 id="name">Name:</h2>
-      <p id="bio">Bio:</p>
-      <p id="location">Location:</p>
-      <p id="repos">Repositories:</p>
-      <p id="followers">Followers:</p>
-      <p id="following">Following:</p>
-      <a id="profile-link" href="#" target="_blank">View Profile</a>
-    </div>
-    <script>
-      function fetchGitHubUser() {
-        const username = document.getElementById("username").value;
-        const errorDiv = document.getElementById("error");
-        const userinfoDiv = document.getElementById("user-info");
 
-        errorDiv.textContent = "";
-        userinfoDiv.style.display = "none";
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub User Fetch</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
 
-        if (!username) {
-          errorDiv.textContent = "Please enter a username.";
-          return;
-        }
+    .user-info {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
 
-        const url = `https://api.github.com/users/${username}`;
+    .user-info img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
 
-        fetch(url)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`User not found: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then(userData => {
-            console.log(userData);
-            document.getElementById("avatar").src = userData.avatar_url;
-            document.getElementById("name").textContent = `Name: ${userData.login || "Not available"}`;
-            document.getElementById("bio").textContent = `Bio: ${userData.bio || "Not available"}`;
-            document.getElementById("location").textContent = `Location: ${userData.location || "Not available"}`;
-            document.getElementById("repos").textContent = `Repositories: ${userData.public_repos || "Not available"}`;
-            document.getElementById("followers").textContent = `Followers: ${userData.followers || "Not available"}`;
-            document.getElementById("following").textContent = `Following: ${userData.following || "Not available"}`;
-            document.getElementById("profile-link").href = userData.html_url;
+    .error {
+      color: red;
+    }
+  </style>
+</head>
 
-            userinfoDiv.style.display = "block";
-          })
-          .catch(error => {
-            console.error("Error fetching user:", error);
-            errorDiv.textContent = error.message;
-          });
+<body>
+  <h1>GitHub User Fetch</h1>
+  <input type="text" id="username" placeholder="Enter GitHub username" />
+  <button onclick="fetchGitHubUser()">Fetch User</button>
+  <div class="error" id="error"></div>
+  <div class="user-info" id="user-info">
+    <img id="avatar" alt="User Avatar" />
+    <h2 id="name">Name:</h2>
+    <p id="bio">bio:</p>
+    <p id="location">Location:</p>
+    <p id="repos">repositories:</p>
+    <p id="followers">Followers:</p>
+    <p id="following">Following:</p>
+    <a id="profile-link" href="#" target="_blank">View Profile</a>
+  </div>
+  <script>
+    function fetchGitHubUser() {
+      const username = document.getElementById("username").value;
+      const errorDiv = document.getElementById("error");
+      const userinfoDiv = document.getElementById("user-info");
+
+      errorDiv.textContent = "";
+      userinfoDiv.style.display = "none";
+
+      if (!username) {
+        errorDiv.textContent = "please enter a username.";
+        return
       }
-    </script>
-  </body>
+
+      const url = `https://api.github.com/users/${username}`;
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`user not found: $(response.status)`);
+          }
+          return response.json();
+        })
+
+        .then(userData => {
+          console.log(userData)
+          document.getElementById("avatar").src = userData.avatar_url;
+          document.getElementById("name").textContent = ` Name:${userData.login || "Not available"}`;
+          document.getElementById("bio").textContent = `Bio:${userData.bio || "Not available"}`;
+          document.getElementById("location").textContent = `location:${userData.location || "Not available"}`;
+          document.getElementById("repos").textContent = `repositories:${userData.public_repos || "Not available"}`;
+          document.getElementById("profile-link").href = userData.html_url
+
+
+          userinfoDiv.style.display = "block";
+
+
+
+        })
+        .catch(error => {
+          console.error("Error fetching user:", error);
+
+        })
+    }
+  </script>
+
+</body>
+
 </html>

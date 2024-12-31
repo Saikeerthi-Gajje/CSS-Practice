@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Example</title>
+</head>
+
+<body>
+
+    <h1>Local Storage Example</h1>
+    <label for="dataInput">Enter Your Name</label>
+    <input type="text" id="dataInput" placeholder="Type Here"><br><br>
+    <button id="saveButton">Save to Local Storage</button><br><br>
+    <button id="getButton">Get From Local Storage</button><br><br>
+    <button id="clearButton">Clear Local Storage</button><br><br>
+    <p id="output"></p>
+
+    <script>
+        const dataInput = document.getElementById("dataInput");
+        const saveButton = document.getElementById("saveButton");
+        const getButton = document.getElementById("getButton");
+        const clearButton = document.getElementById("clearButton");
+        const output = document.getElementById("output");
+
+        saveButton.addEventListener("click", () => {
+            const data = dataInput.value;
+            if(data){
+                localStorage.setItem("name", data);
+           alert("Data Saved to Local Storage!");
+            }
+            else{
+                alert("Please enter some data!");
+            }
+        });
+        getButton.addEventListener("click", () => { 
+            const saveData = localStorage.getItem("name");
+            if(saveData){
+                output.textContent = `Stored Name: ${saveData}`
+            }
+            else{
+                output.textContent="No Data Found!"
+            }
+        });
+        clearButton.addEventListener("click", () => { 
+            localStorage.removeItem("name");
+            output.textContent = "Local Storage Cleared!";
+        });
+    
+        </script>
+
+</body>
+
+</html>
